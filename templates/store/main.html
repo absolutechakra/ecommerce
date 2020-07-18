@@ -47,6 +47,11 @@
             <a class="nav-link" href="#">Top Deals</a>
           </li>
         </ul>
+        <div class="search-bar mt-sm-2 mr-2">
+            <form method="get">
+                <input type="text" class="form-control" name="q" id="id_q" placeholder="Search...">
+            </form>
+        </div>
 
         <div class="form-inline my-2 my-lg-0">
           <a href="#"class="btn btn-warning">Login</a>
@@ -70,5 +75,9 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+
+    <script type="text/javascript">
+        document.getElementById("id_q").value = "{{ query }}"
+    </script>
 </body>
 </html>

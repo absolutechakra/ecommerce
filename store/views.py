@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import Q
 from django.http import JsonResponse
 from .models import Product, Order, OrderItem
 import json
@@ -17,7 +18,7 @@ def store(request):
         cartItems = order.get_cart_items
     
     products = Product.objects.all()
-    context = {'products': products, 'cartItems': cartItems}
+    context = {'items': items, 'products': products, 'cartItems': cartItems}
     return render(request, 'store/store.html', context)
 
 def checkout(request):
@@ -73,4 +74,18 @@ def update_item(request):
         orderItem.delete()
        
     return JsonResponse('Item was added', safe=False)
+
+
+def get_queryset(search=None):
+    queryset = []
+    queries = search.split()
+    for query in queries:
+        posts = Product.objects.filter(
+            Q(name__icontains=query)
+        )
+    
+        for post in posts:
+            queryset.append(post)
+            
+    return list(set(queryset))
 
